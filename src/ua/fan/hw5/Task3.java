@@ -9,7 +9,7 @@ public class Task3 {
         fillRandArray(initial);
         printArray(initial);
         System.out.println();
-        arrayPermutation(initial);
+        printArray(arrayPermutation(initial));
     }
 
     private static void printArray(int[][] array) {
@@ -37,7 +37,7 @@ public class Task3 {
         return copy;
     }
 
-    private static void arrayPermutation(int[][] array) {
+    private static int[][] arrayPermutation(int[][] array) {
         int[][] copy = copyArray(array);
         for (int i = 0; i < copy.length; i++) {
             for (int j = 0; j < copy[i].length; j++) {
@@ -48,6 +48,6 @@ public class Task3 {
                 }
             }
         }
-        printArray(copy);
+        return copy;
     }
 }
