@@ -13,9 +13,14 @@ public class Task3 {
     }
 
     private static int wordCounter(String text) {
-        int counter = 1;
+        int counter = 0;
+        boolean firstWord = false;
         for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) == ' ' && text.charAt(i + 1) != ' ') {
+            if (firstWord == false && text.charAt(i) != ' ') {
+                counter++;
+                firstWord = true;
+            }
+            if (firstWord && i != text.length() - 1 && text.charAt(i) == ' ' && text.charAt(i + 1) != ' ')  {
                 counter++;
             }
         }
