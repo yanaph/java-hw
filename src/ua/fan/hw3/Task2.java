@@ -19,8 +19,6 @@ public class Task2 {
     private static boolean isPalindrome(String text) {
         StringBuilder str = new StringBuilder(deleteWhitespaces(text));
         StringBuilder reverse = new StringBuilder(str).reverse();
-//        System.out.println("String without spaces: " + str);
-//        System.out.println("Reversed string: " + reverse);
         return str.toString().equals(reverse.toString());
     }
 
