@@ -15,7 +15,7 @@ public class Task2_3 {
 
     }
 
-    private static int countPrimeNumbers(int[] arr) {
+    static int countPrimeNumbers(int[] arr) {
         int count = 0;
         for (int j : arr) {
             if (isPrimeNum(j)) {
@@ -25,7 +25,7 @@ public class Task2_3 {
         return count;
     }
 
-    private static int countCompositeNumbers(int[] arr) {
+    static int countCompositeNumbers(int[] arr) {
         int count = 0;
         for (int j : arr) {
             if (isCompositeNum(j)) {
@@ -35,9 +35,9 @@ public class Task2_3 {
         return count;
     }
 
-    private static boolean isPrimeNum(int number) {
+    static boolean isPrimeNum(int number) {
         boolean prime = true;
-        if (number != 1) {
+        if (number != 1 && number != 0) {
             for (int i = 2; i < number; i++) {
                 if (i != number && number % i == 0) {
                     prime = false;
@@ -50,7 +50,7 @@ public class Task2_3 {
         return prime;
     }
 
-    private static boolean isCompositeNum(int number) {
+    static boolean isCompositeNum(int number) {
         boolean composite = false;
         if (number != 1) {
             for (int i = 2; i < number; i++) {
