@@ -1,10 +1,10 @@
 package ua.fan.hw7;
 
 public class Car {
-    String manufacturer;
-    String engine;
-    String color;
-    int petrol;
+    private String manufacturer;
+    private String engine;
+    private String color;
+    private int petrol;
 
 
     public Car(String manufacturer, String engine, String color, int petrol) {

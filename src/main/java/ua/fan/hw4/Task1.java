@@ -13,7 +13,7 @@ public class Task1 {
         System.out.println("Geometric mean = " + geometricMean(array));
     }
 
-    private static double mean (int[] arr) {
+    static double mean(int[] arr) {
         double sum = 0;
         for (int j : arr) {
             sum += j;
@@ -21,7 +21,7 @@ public class Task1 {
         return sum/(arr.length);
     }
 
-    private static double geometricMean (int[] arr) {
+     static double geometricMean (int[] arr) {
         double product = 1;
         for (int j : arr) {
             product *= j;

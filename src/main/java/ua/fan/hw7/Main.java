@@ -6,9 +6,9 @@ public class Main {
         Car shelby = new Car("Mustang", "Supercharged ", "Grey", 30);
         Car camaro = new Car("Chevrolet", "Turbocharged ", "Yellow");
 
-        System.out.println("--> Sabre:\n" + sabre.toString());
-        System.out.println("--> Shelby:\n" + shelby.toString());
-        System.out.println("--> Camaro:\n" + camaro.toString());
+        System.out.println("--> Sabre:\n" + sabre);
+        System.out.println("--> Shelby:\n" + shelby);
+        System.out.println("--> Camaro:\n" + camaro);
 
         System.out.println("\n-->Starting engines for a trip! ");
         startTravelling(sabre, "McLaren Sabre");
