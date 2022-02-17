@@ -9,14 +9,19 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GetRandomNumberTest {
-    private static final Random RANDOM = Mockito.mock(Random.class);
-    private GetRandomNumber target = new GetRandomNumber();
+    private static Random RANDOM;
+    private GetRandomNumber target;
+
+    @BeforeEach
+    void setUp(){
+        RANDOM = Mockito.mock(Random.class);
+        target = new GetRandomNumber();
+    }
 
     @Test
     void get_allFineWhen0(){
         Mockito.when(RANDOM.nextInt(100)).thenReturn(0);
         Assertions.assertEquals(0, target.get(RANDOM));
-        System.out.println(RANDOM.nextInt(100));
     }
 
     @Test
