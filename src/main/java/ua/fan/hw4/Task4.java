@@ -11,16 +11,16 @@ public class Task4 {
         System.out.println("Original:");
         System.out.println(Arrays.toString(array));
         System.out.println("with annulled evens: ");
-        nullAllEvens(array);
+        System.out.println(Arrays.toString(nullAllEvens(array)));
     }
 
-    private static void nullAllEvens(int[] arr) {
+    static int[] nullAllEvens(int[] arr) {
         int[] annulled = Arrays.copyOf(arr, arr.length);
         for (int i = 0; i < annulled.length; i++) {
             if (annulled[i] % 2 == 0) {
                 annulled[i] = 0;
             }
         }
-        System.out.println(Arrays.toString(annulled));
+        return annulled;
     }
 }
