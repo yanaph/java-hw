@@ -1,11 +1,10 @@
 package ua.fan.hw10.model;
 
-public class Truck extends Car implements Recovery{
+public class Truck extends Car implements Recovery {
     private double cargo;
 
-    public Truck(int series, int year, String color) {
-        super(series, year, color);
-        fuel = 3000;
+    public Truck(int series, int year, String color, int currentFuelLevel) {
+        super(series, year, color, currentFuelLevel);
         this.cargo = 0;
     }
 
@@ -25,22 +24,18 @@ public class Truck extends Car implements Recovery{
 
     @Override
     public void movement() {
-        System.out.println("-> Let's start the trip!");
+        System.out.println("Let's start the trip!");
         int distance = 0;
-        while (fuel > 0) {
-            fuel --;
-            distance += 5;
-            if (fuel % 750 == 0) {
-                System.out.println("Distance travelled: " + distance + "km");
-                System.out.println("Fuel left: " + fuel);
-            }
+        while (currentFuelLevel > 0) {
+            currentFuelLevel -= 2;
+            distance += 10;
         }
-        System.out.println("-> The trip is over: no fuel left.");
+        System.out.println("The trip is over: no fuel left.");
+        System.out.println("Traveled distance: " + distance);
     }
 
     @Override
     public void refuel() {
-        fuel = 3000;
-        System.out.println("Truck is refueled! \nFuel: " + fuel);
+        System.out.println("Truck is refueled! \nFuel: " + currentFuelLevel);
     }
 }

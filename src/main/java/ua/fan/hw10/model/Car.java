@@ -4,40 +4,42 @@ public class Car implements Recovery{
     protected int series;
     protected int year;
     protected String color;
-    protected int fuel;
+    protected int currentFuelLevel;
+    protected final int MAX_FUEL = 100;
 
-    public Car(int series, int year, String color) {
+    public Car(int series, int year, String color, int currentFuelLevel) {
         this.series = series;
         this.year = year;
         this.color = color;
-        fuel = 65;
+        if (currentFuelLevel < MAX_FUEL){
+            this.currentFuelLevel = currentFuelLevel;
+        } else {
+            this.currentFuelLevel = MAX_FUEL;
+        }
     }
 
     public void movement() {
-        System.out.println("-> Let's start the trip!");
+        System.out.println("Let's start the trip!");
         int distance = 0;
-        while (fuel > 0) {
-            fuel --;
+        while (currentFuelLevel > 0){
+            currentFuelLevel --;
             distance += 10;
-            if (fuel % 20 == 0) {
-                System.out.println("Distance travelled: " + distance + "km");
-                System.out.println("Fuel left: " + fuel);
-            }
         }
-        System.out.println("-> The trip is over: no fuel left.");
+        System.out.println("The trip is over: no fuel left.");
+        System.out.println("Traveled distance: " + distance);
     }
 
-    public void statistics() {
+    public void printStatistics() {
         System.out.println(
                 "Series: " + series +
                 "\nYear: " + year +
                 "\nColor: " + color +
-                "\nFuel: " + fuel);
+                "\nFuel: " + currentFuelLevel);
     }
 
     @Override
     public void refuel() {
-        fuel = 65;
-        System.out.println("Car is refueled! \nFuel: " + fuel);
+        currentFuelLevel = MAX_FUEL;
+        System.out.println("Car is refueled! \nFuel: " + currentFuelLevel);
     }
 }
