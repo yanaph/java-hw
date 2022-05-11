@@ -14,15 +14,13 @@ public class Dictionary {
         str = str.toLowerCase()
                 .replaceAll("\\p{Punct}", "");
         String[] words = str.split(" ");
-        int count = 0;
-        for (String w : words) {
-            for (String w2 : words) {
-                if (w.equals(w2)) {
-                    count++;
-                }
+        Integer count;
+        for (String word : words) {
+            count = dictionary.get(word);
+            if (count == null) {
+                count = 0;
             }
-            dictionary.put(w, count);
-            count = 0;
+            dictionary.put(word, ++count);
         }
     }
 

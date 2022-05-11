@@ -5,9 +5,6 @@ import java.util.*;
 import static ua.fan.hw16.ListMethods.*;
 
 public class Main {
-    final public static Random random = new Random();
-    final static int NUMBER_OF_ELEMENTS = 100000;
-
     public static void main(String[] args) {
         task1();
         task2();

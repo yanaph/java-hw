@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 public class ListMethods {
-    final public static Random random = new Random();
-    final static int NUMBER_OF_ELEMENTS = 100000;
+    private final static Random random = new Random();
+    private final static int NUMBER_OF_ELEMENTS = 100000;
 
     public static void fillList(List<Integer> list) {
         for (int i = 0; i < NUMBER_OF_ELEMENTS; i++) {
