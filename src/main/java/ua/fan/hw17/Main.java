@@ -2,23 +2,24 @@ package ua.fan.hw17;
 
 import ua.fan.hw17.model.Box;
 import ua.fan.hw17.model.Item;
+import ua.fan.hw17.model.Predicate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-//        task1();
-//        task2();
-//        task3();
-//        task4();
+        task1();
+        task2();
+        task3();
+        task4();
         task5();
-
-
     }
 
     public static void task1() {
+        System.out.println("             TASK 1");
         String[] array = {"apple",
                 "orange",
                 "watermelon",
@@ -31,6 +32,7 @@ public class Main {
     }
 
     public static void task2() {
+        System.out.println("\n             TASK 2");
         List<Integer> randomNumbers = new Random().ints(5, 0, 10)
                 .collect(LinkedList::new, LinkedList::add, LinkedList::addAll);
         IntSummaryStatistics summaryStatistics = randomNumbers.stream()
@@ -48,6 +50,7 @@ public class Main {
     }
 
     public static void task3() {
+        System.out.println("\n             TASK 3");
         final List<String> listOfDates = new LinkedList<>();
         listOfDates.add("2003/10/22");
         listOfDates.add("1997/09/12");
@@ -67,7 +70,7 @@ public class Main {
     }
 
     public static void task4() {
-
+        System.out.println("\n             TASK 4");
         final List<Integer> listOfIntNumbers = new Random().ints(10, -50, 50)
                 .collect(LinkedList::new, LinkedList::add, LinkedList::addAll);
         System.out.println("Initial list:");
@@ -80,16 +83,29 @@ public class Main {
     }
 
     public static void task5() {
-        List<Box> boxList = createCollectionOfBox(3);
+        System.out.println("\n             TASK 5");
+        final List<Box> boxList = createCollectionOfBox(10);
+        System.out.println("Initial List:");
         for (Box box : boxList) {
             System.out.println(box);
         }
+
+        final double MIN_SIZE = 22.0;
+        final double MAX_SIZE = 42.0;
+        Predicate<Box> isInRange = box -> box.getSize() <= (MIN_SIZE + Math.random() * (MAX_SIZE - MIN_SIZE + 1));
+        System.out.println("\nFiltered list");
+        List<Item> filteredBoxList = boxList.stream()
+                .filter(isInRange::test)
+                .flatMap(box -> box.getItemList().stream())
+                .sorted(Comparator.comparing(Item::getCost))
+                .collect(Collectors.toList());
+        System.out.println(filteredBoxList);
     }
 
     public static List<Box> createCollectionOfBox(int numberOfBoxes) {
         List<Box> listOfBoxes = new ArrayList<>();
         for (int i = 0; i < numberOfBoxes; i++) {
-            listOfBoxes.add(new Box(createCollectionOfItems(3), (Math.random() + 1) * 10));
+            listOfBoxes.add(new Box(createCollectionOfItems(2), (Math.random() + 0.1) * 100));
         }
         return listOfBoxes;
     }
