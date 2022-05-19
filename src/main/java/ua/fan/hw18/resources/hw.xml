@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<box from="China" material="Steel">
+    <color>Black</color>
+    <max-lifting-capacity unit="kg">150</max-lifting-capacity>
+    <cargo>
+        <name>electronics</name>
+        <class>C-1</class>
+    </cargo>
+    <delivery-date>2021-09-20T11:07:00</delivery-date>
+</box>
