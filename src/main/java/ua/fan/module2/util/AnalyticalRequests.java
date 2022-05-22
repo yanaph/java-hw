@@ -41,8 +41,8 @@ public class AnalyticalRequests {
     public List<Invoice> getOneDeviceTypeInvoices(ArrayList<Invoice> invoices){
         return invoices.stream()
                 .filter(invoice -> Arrays.stream(invoice.getItems())
-                                .allMatch(device -> device.getClass().getSimpleName().equals("Telephone")
-                                || device.getClass().getSimpleName().equals("Television")))
+                                .allMatch(device -> device.getClass().getSimpleName().equals("Telephone"))
+                                || Arrays.stream(invoice.getItems()).allMatch (device -> device.getClass().getSimpleName().equals("Television")))
                 .collect(Collectors.toList());
     }
 

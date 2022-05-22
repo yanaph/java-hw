@@ -23,12 +23,13 @@ public class ShopService {
     }
 
     private void generateListOfInvoices(List<Device> catalogue) {
+        int number = 15;
        try {
            System.out.print("\nSeconds left: ");
-           for (int i = 0; i < 2; i++) {
+           for (int i = 0; i < number; i++) {
                invoices.add(generateInvoice(catalogue));
-               Thread.sleep(10);
-               System.out.print(15-(i+1) +  "...");
+               Thread.sleep(1000);
+               System.out.print(number - (i+1) +  "... ");
            }
            System.out.println();
        } catch (InterruptedException e) {
@@ -47,27 +48,27 @@ public class ShopService {
 
     public void analyticRequestsResult(){
         final AnalyticalRequests analyticalRequests = new AnalyticalRequests();
-        System.out.println("\n---> Number of items sold by category: \n" +
-                "Televisions: " + analyticalRequests.soldAmountSortedByCategory(invoices, "Television") +
-                "\nTelephones: " + analyticalRequests.soldAmountSortedByCategory(invoices, "Telephone"));
-
-        System.out.println("\n---> Customer info of invoice with minimum total price: \n" +
-                "Total: " + analyticalRequests.minSumInvoiceInfo(invoices).getTotalPrice() +
-                "\n Customer info: \n" + analyticalRequests.minSumInvoiceInfo(invoices).getCustomer());
-
-        System.out.println("\n---> Total price of all invoices: \n" +
-                "Total: " + analyticalRequests.getTotalPriceOfAllInvoices(invoices));
-
-        System.out.println("\n---> Number of invoices with retail type:\n" +
-                analyticalRequests.getRetailInvoicesNumber(invoices));
+//        System.out.println("\n---> Number of items sold by category: \n" +
+//                "Televisions: " + analyticalRequests.soldAmountSortedByCategory(invoices, "Television") +
+//                "\nTelephones: " + analyticalRequests.soldAmountSortedByCategory(invoices, "Telephone"));
+//
+//        System.out.println("\n---> Customer info of invoice with minimum total price: \n" +
+//                "Total: " + analyticalRequests.minSumInvoiceInfo(invoices).getTotalPrice() +
+//                "\n Customer info: \n" + analyticalRequests.minSumInvoiceInfo(invoices).getCustomer());
+//
+//        System.out.println("\n---> Total price of all invoices: \n" +
+//                "Total: " + analyticalRequests.getTotalPriceOfAllInvoices(invoices));
+//
+//        System.out.println("\n---> Number of invoices with retail type:\n" +
+//                analyticalRequests.getRetailInvoicesNumber(invoices));
 
         System.out.println("\n---> Invoices that contain only one type of devices:\n" +
                 analyticalRequests.getOneDeviceTypeInvoices(invoices));
 
-        System.out.println("\n---> Low age invoices:\n " +
-                analyticalRequests.getLowAgeInvoices(invoices));
-
-         System.out.println("\n---> Sorting invoices by condition:\n " +
-                analyticalRequests.sortInvoicesByCondition(invoices));
+//        System.out.println("\n---> Low age invoices:\n " +
+//                analyticalRequests.getLowAgeInvoices(invoices));
+//
+//         System.out.println("\n---> Sorting invoices by condition:\n " +
+//                analyticalRequests.sortInvoicesByCondition(invoices));
     }
 }
