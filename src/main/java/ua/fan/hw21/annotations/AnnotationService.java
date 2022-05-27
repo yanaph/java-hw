@@ -68,22 +68,21 @@ public class AnnotationService {
             if (declaredField.isAnnotationPresent(Multiplier.class)) {
                 final Multiplier.Action action = declaredField.getAnnotation(Multiplier.class).action();
                 final Class<?> fieldType = declaredField.getType();
-
-                if (isNumber(fieldType)) {
                     declaredField.setAccessible(true);
-                    Number newValue = 0;
+                    Number newValue;
                     if (fieldType.equals(Integer.class) || fieldType.equals(int.class)) {
                         final Integer fieldValue = (Integer) declaredField.get(object);
                         newValue = arithmeticalOperationForInteger(fieldValue, action);
+                        declaredField.set(object, newValue);
                     } else if (fieldType.equals(Double.class) || fieldType.equals(double.class)) {
                         final Double fieldValue = (Double) declaredField.get(object);
                         newValue = arithmeticalOperationForDouble(fieldValue, action);
+                        declaredField.set(object, newValue);
                     } else if (fieldType.equals(Long.class) || fieldType.equals(long.class)) {
-                        final Long fieldValue = (long) declaredField.get(object);
+                        final Long fieldValue = (Long) declaredField.get(object);
                         newValue = arithmeticalOperationForLong(fieldValue, action);
-                    }
-                    declaredField.set(object, newValue);
-                } else {
+                        declaredField.set(object, newValue);
+                    } else {
                     System.out.printf("Cannot implement arithmetical operations with %s%n", fieldType.getSimpleName());
                 }
             }
@@ -133,15 +132,5 @@ public class AnnotationService {
             }
         }
         return 0;
-    }
-
-    private static boolean isNumber(Class<?> fieldType) {
-        return !(fieldType.equals(String.class) ||
-                fieldType.equals(Character.class) ||
-                fieldType.equals(char.class) ||
-                fieldType.equals(Boolean.class) ||
-                fieldType.equals(boolean.class) ||
-                fieldType.equals(Byte.class) ||
-                fieldType.equals(byte.class));
     }
 }
