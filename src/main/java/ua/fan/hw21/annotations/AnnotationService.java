@@ -1,10 +1,7 @@
-package ua.fan.hw21.model;
+package ua.fan.hw21.annotations;
 
 import lombok.SneakyThrows;
 import org.reflections.Reflections;
-import ua.fan.hw21.annotations.AutoCreate;
-import ua.fan.hw21.annotations.Init;
-import ua.fan.hw21.annotations.Multiplier;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -42,7 +39,7 @@ public class AnnotationService {
         objects.forEach((s, object) -> {
             final Method[] declaredMethods = object.getClass().getDeclaredMethods();
             for (Method declaredMethod : declaredMethods) {
-                if (declaredMethod.isAnnotationPresent(Init.class)){
+                if (declaredMethod.isAnnotationPresent(Init.class)) {
                     System.out.printf("---> %s @Init method: %n", object.getClass().getSimpleName());
                     try {
                         declaredMethod.invoke(object);
@@ -73,13 +70,17 @@ public class AnnotationService {
                 final Class<?> fieldType = declaredField.getType();
 
                 if (isNumber(fieldType)) {
-                    final double fieldValue = (double) declaredField.get(object);
                     declaredField.setAccessible(true);
                     Number newValue = 0;
-                    switch (action) {
-                        case MULTIPLICATION -> newValue = fieldValue * 3;
-                        case ADDITION -> newValue = fieldValue + fieldValue;
-                        case SUBTRACTION -> newValue = fieldValue - 1;
+                    if (fieldType.equals(Integer.class) || fieldType.equals(int.class)) {
+                        final Integer fieldValue = (Integer) declaredField.get(object);
+                        newValue = arithmeticalOperationForInteger(fieldValue, action);
+                    } else if (fieldType.equals(Double.class) || fieldType.equals(double.class)) {
+                        final Double fieldValue = (Double) declaredField.get(object);
+                        newValue = arithmeticalOperationForDouble(fieldValue, action);
+                    } else if (fieldType.equals(Long.class) || fieldType.equals(long.class)) {
+                        final Long fieldValue = (long) declaredField.get(object);
+                        newValue = arithmeticalOperationForLong(fieldValue, action);
                     }
                     declaredField.set(object, newValue);
                 } else {
@@ -89,11 +90,58 @@ public class AnnotationService {
         }
     }
 
+    private static Number arithmeticalOperationForInteger(Integer fieldValue, Multiplier.Action action) {
+        switch (action) {
+            case MULTIPLICATION -> {
+                return fieldValue * 3;
+            }
+            case ADDITION -> {
+                return fieldValue + fieldValue;
+            }
+            case SUBTRACTION -> {
+                return fieldValue - 1;
+            }
+        }
+        return 0;
+    }
+
+    private static Number arithmeticalOperationForDouble(Double fieldValue, Multiplier.Action action) {
+        switch (action) {
+            case MULTIPLICATION -> {
+                return fieldValue * 3;
+            }
+            case ADDITION -> {
+                return fieldValue + fieldValue;
+            }
+            case SUBTRACTION -> {
+                return fieldValue - 1;
+            }
+        }
+        return 0;
+    }
+
+    private static Number arithmeticalOperationForLong(Long fieldValue, Multiplier.Action action) {
+        switch (action) {
+            case MULTIPLICATION -> {
+                return fieldValue * 3;
+            }
+            case ADDITION -> {
+                return fieldValue + fieldValue;
+            }
+            case SUBTRACTION -> {
+                return fieldValue - 1;
+            }
+        }
+        return 0;
+    }
+
     private static boolean isNumber(Class<?> fieldType) {
         return !(fieldType.equals(String.class) ||
                 fieldType.equals(Character.class) ||
                 fieldType.equals(char.class) ||
                 fieldType.equals(Boolean.class) ||
-                fieldType.equals(boolean.class));
+                fieldType.equals(boolean.class) ||
+                fieldType.equals(Byte.class) ||
+                fieldType.equals(byte.class));
     }
 }
