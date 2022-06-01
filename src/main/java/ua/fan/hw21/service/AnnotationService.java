@@ -1,9 +1,13 @@
-package ua.fan.hw21.annotations;
+package ua.fan.hw21.service;
 
 import lombok.SneakyThrows;
 import org.reflections.Reflections;
+import ua.fan.hw21.annotations.AutoCreate;
+import ua.fan.hw21.annotations.Init;
+import ua.fan.hw21.annotations.Multiplier;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -17,7 +21,8 @@ public class AnnotationService {
 
         for (Class<?> aClass : annotatedWith) {
             try {
-                final Object obj = aClass.newInstance();
+                final Constructor<?> constructor = aClass.getConstructor();
+                final Object obj = constructor.newInstance();
                 final Field[] declaredFields = aClass.getDeclaredFields();
                 System.out.printf("%n-----> CLASS %s " +
                         "%n---> Fields annotation:%n", aClass.getSimpleName().toUpperCase());
@@ -27,7 +32,8 @@ public class AnnotationService {
                 fieldValueChanging(declaredFields, obj);
                 System.out.println(obj);
                 objects.put(aClass.getSimpleName(), obj);
-            } catch (InstantiationException | IllegalAccessException e) {
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
