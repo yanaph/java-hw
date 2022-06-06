@@ -23,21 +23,16 @@ public class DeviceDao extends AbstractDao<Device> {
         ENTITY_MANAGER.merge(deviceToUpdate);
     }
 
-//    public List<Device> getAllDevicesOfCertainFactory(String factoryName){
-//        final CriteriaBuilder criteriaBuilder = ENTITY_MANAGER.getCriteriaBuilder();
-//        final CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
-//        final Root<Device> deviceRoot = criteriaQuery.from(Device.class);
-//        Join<Device, Factory> factoryJoin = deviceRoot.join("factory");
-//
-//        criteriaQuery.select(deviceRoot)
-//                        .where(deviceRoot.get("id") == factoryJoin.
-//                factoryJoin.get("id"),
-//                criteriaBuilder.count(deviceRoot.get("id")),
-//                criteriaBuilder.sum(deviceRoot.get("price")));
-//
-//        criteriaQuery.groupBy(factoryJoin.get("id"), factoryJoin.get("name"));
-//        Query query = ENTITY_MANAGER.createQuery(criteriaQuery);
-//        return query.getResultList();
-//    }
+    public List<Device> getAllDevicesOfCertainFactory(String factoryName){
+        final CriteriaBuilder criteriaBuilder = ENTITY_MANAGER.getCriteriaBuilder();
+        final CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
+        final Root<Device> factoryRoot = criteriaQuery.from(Device.class);
+        Join<Device, Factory> factoryJoin = factoryRoot.join("factory");
+
+        criteriaQuery.select(factoryRoot)
+                        .where(criteriaBuilder.equal(factoryJoin.get("name"), factoryName));
+        Query query = ENTITY_MANAGER.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
 
 }

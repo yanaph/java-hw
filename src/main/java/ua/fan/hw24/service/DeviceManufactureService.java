@@ -100,12 +100,12 @@ public class DeviceManufactureService {
         factoryDao.getAll().forEach(factory -> System.out.println(getFactoryInfo(factory)));
 
         System.out.println("---> GETTING TOTAL DEVICE INFO ABOUT EACH FACTORY");
-        factoryDao.getTotalInfoAboutEachFactory().forEach(factory -> {
-            System.out.printf("Factory: %s%n Device count: %s%n Total price:  %s%n",
-                    factoryDao.getById((Integer) factory[0]).getName(), factory[1], factory[2]);
-        });
+        factoryDao.getTotalInfoAboutEachFactory().forEach(factory ->
+                System.out.printf("Factory: %s%n Device count: %s%n Total price:  %s%n%n",
+                factoryDao.getById((Integer) factory[0]).getName(), factory[1], factory[2]));
 
-
+        System.out.println("---> GETTING ALL DEVICES OF CERTAIN FACTORY");
+        deviceDao.getAllDevicesOfCertainFactory("Nokia").forEach(device -> System.out.print(getDeviceInfo(device)));
     }
 
 
