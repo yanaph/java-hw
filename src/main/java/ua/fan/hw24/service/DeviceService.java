@@ -1,9 +1,8 @@
 package ua.fan.hw24.service;
 
-import ua.fan.hw24.model.Device;
-import ua.fan.hw24.model.Factory;
+import ua.fan.hw24.entity.Device;
+import ua.fan.hw24.entity.Factory;
 
-import java.util.Locale;
 import java.util.Random;
 
 public class DeviceService {
@@ -12,6 +11,4 @@ public class DeviceService {
     public Device createDevice(String type,String modelName, String description, boolean inStock, Factory factory) {
         return new Device(type, modelName, RANDOM.nextInt(1000), description, inStock, factory);
     }
-
-
 }

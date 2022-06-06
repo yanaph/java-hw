@@ -2,11 +2,9 @@ package ua.fan.hw24.service;
 
 import ua.fan.hw24.dao.DeviceDao;
 import ua.fan.hw24.dao.FactoryDao;
-import ua.fan.hw24.model.Device;
-import ua.fan.hw24.model.Factory;
+import ua.fan.hw24.entity.Device;
+import ua.fan.hw24.entity.Factory;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -86,9 +84,35 @@ public class DeviceManufactureService {
     }
 
     public void print() {
+        System.out.println("---> GETTING ALL DATA FROM DEVICE TABLE");
         deviceDao.getAll().forEach(device -> System.out.println(getDeviceInfo(device)));
+
+        System.out.println("---> DOUBLING PRICE OF THE 2nd ELEMENT...");
         deviceDao.doubleDevicePrice(2);
+
+        System.out.println("---> GETTING 2nd ELEMENT FROM TABLE");
         System.out.println(getDeviceInfo(deviceDao.getById(2)));
+
+        System.out.println("---> DELETING 2nd ELEMENT FROM TABLE");
+        deviceDao.delete(2);
+
+        System.out.println("---> GETTING ALL DATA FROM FACTORY TABLE");
+        factoryDao.getAll().forEach(factory -> System.out.println(getFactoryInfo(factory)));
+
+        System.out.println("---> GETTING TOTAL DEVICE INFO ABOUT EACH FACTORY");
+        deviceDao.getTotalInfoAboutEachFactory().forEach(factory -> {
+            System.out.println("Factory ID: " + factory[0]);
+            System.out.println("Device count: " + factory[1]);
+            System.out.println("Total price: " + factory[2]);
+        });
+
+
+
+    }
+
+    private String getFactoryInfo(Factory factory) {
+        return String.format("Factory ID: %s%n Name: %s%n Country: %s%n",
+                factory.getId(), factory.getName(), factory.getCountry());
     }
 
     private String getDeviceInfo(Device device) {
