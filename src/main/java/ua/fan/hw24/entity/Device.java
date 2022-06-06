@@ -28,6 +28,11 @@ public class Device {
     @JoinColumn(name = "factory_id")
     private Factory factory;
 
+    @PreRemove
+    private void removeDeviceFromFactory() {
+        factory.getDevices().removeIf(device -> device.getId().equals(this.id));
+    }
+
     public Device(String type, String modelName, int price, String description, boolean inStock, Factory factory) {
         this.type = type;
         this.modelName = modelName;
