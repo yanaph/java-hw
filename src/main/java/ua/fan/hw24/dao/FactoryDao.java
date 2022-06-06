@@ -23,11 +23,11 @@ public class FactoryDao extends AbstractDao<Factory> {
         Join<Device, Factory> factoryJoin = deviceRoot.join("factory");
 
         criteriaQuery.multiselect(
-                factoryJoin.get("id"),
+                factoryJoin.get("name"),
                 criteriaBuilder.count(deviceRoot.get("id")),
                 criteriaBuilder.sum(deviceRoot.get("price")));
 
-        criteriaQuery.groupBy(factoryJoin.get("id"), factoryJoin.get("name"));
+        criteriaQuery.groupBy(factoryJoin.get("name"));
         Query query = ENTITY_MANAGER.createQuery(criteriaQuery);
         return query.getResultList();
     }

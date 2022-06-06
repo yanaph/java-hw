@@ -26,10 +26,10 @@ public class DeviceDao extends AbstractDao<Device> {
     public List<Device> getAllDevicesOfCertainFactory(String factoryName){
         final CriteriaBuilder criteriaBuilder = ENTITY_MANAGER.getCriteriaBuilder();
         final CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
-        final Root<Device> factoryRoot = criteriaQuery.from(Device.class);
-        Join<Device, Factory> factoryJoin = factoryRoot.join("factory");
+        final Root<Device> deviceRoot = criteriaQuery.from(Device.class);
+        Join<Device, Factory> factoryJoin = deviceRoot.join("factory");
 
-        criteriaQuery.select(factoryRoot)
+        criteriaQuery.select(deviceRoot)
                         .where(criteriaBuilder.equal(factoryJoin.get("name"), factoryName));
         Query query = ENTITY_MANAGER.createQuery(criteriaQuery);
         return query.getResultList();
