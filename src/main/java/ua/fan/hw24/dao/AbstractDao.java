@@ -46,7 +46,7 @@ abstract class AbstractDao<T> {
     }
 
 
-    public void delete(Integer id) {
+    public void deleteById(Integer id) {
         final EntityTransaction transaction = ENTITY_MANAGER.getTransaction();
         T value = getById(id);
         transaction.begin();

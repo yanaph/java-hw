@@ -94,21 +94,20 @@ public class DeviceManufactureService {
         System.out.println(getDeviceInfo(deviceDao.getById(2)));
 
         System.out.println("---> DELETING 2nd ELEMENT FROM TABLE");
-        deviceDao.delete(2);
+        deviceDao.deleteById(2);
 
         System.out.println("---> GETTING ALL DATA FROM FACTORY TABLE");
         factoryDao.getAll().forEach(factory -> System.out.println(getFactoryInfo(factory)));
 
         System.out.println("---> GETTING TOTAL DEVICE INFO ABOUT EACH FACTORY");
-        deviceDao.getTotalInfoAboutEachFactory().forEach(factory -> {
-            System.out.println("Factory ID: " + factory[0]);
-            System.out.println("Device count: " + factory[1]);
-            System.out.println("Total price: " + factory[2]);
+        factoryDao.getTotalInfoAboutEachFactory().forEach(factory -> {
+            System.out.printf("Factory: %s%n Device count: %s%n Total price:  %s%n",
+                    factoryDao.getById((Integer) factory[0]).getName(), factory[1], factory[2]);
         });
 
 
-
     }
+
 
     private String getFactoryInfo(Factory factory) {
         return String.format("Factory ID: %s%n Name: %s%n Country: %s%n",
@@ -117,7 +116,7 @@ public class DeviceManufactureService {
 
     private String getDeviceInfo(Device device) {
         return String.format("Device ID: %s%n Type: %s%n Model: %s%n Factory: %s%n " +
-                        "Price: %s€%n Date: %s%n In stock: %s%n Description: %s%n",
+                        "Price: %s€%n Date: %s%n In stock: %s%n Description: %s%n%n",
                 device.getId(), device.getType(), device.getModelName(), device.getFactory().getName(),
                 device.getPrice(), device.getManufactureDate().toLocalDate(), device.isInStock() ? "yes" : "no", device.getDescription());
     }

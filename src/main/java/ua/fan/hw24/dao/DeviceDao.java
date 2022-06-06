@@ -23,48 +23,21 @@ public class DeviceDao extends AbstractDao<Device> {
         ENTITY_MANAGER.merge(deviceToUpdate);
     }
 
-    public List<Object[]> getTotalInfoAboutEachFactory(){
-        final CriteriaBuilder criteriaBuilder = ENTITY_MANAGER.getCriteriaBuilder();
-        final CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
-        final Root<Device> deviceRoot = criteriaQuery.from(Device.class);
-        Join<Device, Factory> factoryJoin = deviceRoot.join("factory");
-
-        criteriaQuery.multiselect(
-                factoryJoin.get("id"),
-                criteriaBuilder.count(deviceRoot.get("id")),
-                criteriaBuilder.sum(deviceRoot.get("price")));
-
-        criteriaQuery.groupBy(factoryJoin.get("id"), factoryJoin.get("name"));
-        Query query = ENTITY_MANAGER.createQuery(criteriaQuery);
-         return query.getResultList();
+//    public List<Device> getAllDevicesOfCertainFactory(String factoryName){
 //        final CriteriaBuilder criteriaBuilder = ENTITY_MANAGER.getCriteriaBuilder();
-//        final CriteriaQuery<Object[]> criteriaBuilderQuery = criteriaBuilder.createQuery(Object[].class);
-//        final Root<Device> entity = criteriaBuilderQuery.from(Device.class);
-//        criteriaBuilderQuery.multiselect(entity.get("factory"), criteriaBuilder.count(entity.get("id")), criteriaBuilder.sum(entity.get("price"))).groupBy());
-//        return ENTITY_MANAGER.createQuery(criteriaBuilderQuery).getResultList();
-
-
-//        Query criteriaQuery = ENTITY_MANAGER.createQuery(
-//                "SELECT device.factory, COUNT(device.id), SUM(price) FROM Device device GROUP BY device.factory"
-//        );
-//        List<Object[]> resultList = criteriaQuery.getResultList();
-//        resultList.forEach(objects -> System.out.println(Arrays.toString(objects)));
-
-//        try (Session session = HibernateFactoryUtil.getSessionFactory().openSession()){
-//            CriteriaBuilder builder = session.getCriteriaBuilder();
+//        final CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
+//        final Root<Device> deviceRoot = criteriaQuery.from(Device.class);
+//        Join<Device, Factory> factoryJoin = deviceRoot.join("factory");
 //
-//            CriteriaQuery<Object[]> criteriaQuery = builder.createQuery(Object[].class);
-//            final Root<Device> from = criteriaQuery.from(Device.class);
-//            criteriaQuery.multiselect(from.get("factory"), builder.sum(from.get("price")));
-//            criteriaQuery.groupBy(from.get("factory"));
-//            Query<Object[]> criteriaQuery = session.createQuery(criteriaQuery);
+//        criteriaQuery.select(deviceRoot)
+//                        .where(deviceRoot.get("id") == factoryJoin.
+//                factoryJoin.get("id"),
+//                criteriaBuilder.count(deviceRoot.get("id")),
+//                criteriaBuilder.sum(deviceRoot.get("price")));
 //
-//            List<Object[]> resultList = criteriaQuery.getResultList();
-//            resultList.forEach(factory -> System.out.printf("Factory ID: %s%n Count: %s%n Sum: %s%n",
-//                    factory[0], factory[1], factory[2]));
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-    }
+//        criteriaQuery.groupBy(factoryJoin.get("id"), factoryJoin.get("name"));
+//        Query query = ENTITY_MANAGER.createQuery(criteriaQuery);
+//        return query.getResultList();
+//    }
 
 }
