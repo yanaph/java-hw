@@ -53,7 +53,8 @@ public class InfrastructureService {
     }
 
     public void print() {
-        courseService.printCourseDaoResults(courseDao, 2, 6);
-        curatorService.printCuratorDaoResults(curatorDao, LocalDate.of(1970,5,5), 10);
+//        courseService.printCourseDaoResults(courseDao, 2, 6);
+//        curatorService.printCuratorDaoResults(curatorDao, LocalDate.of(1970,5,5), 10);
+    universityService.printingUniversityInfrastructure(universityDao);
     }
 }
