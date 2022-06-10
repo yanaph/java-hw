@@ -13,8 +13,7 @@ public class UniversityGroupService {
 
     public void printUniversityGroupDaoResults(UniversityGroupDao universityGroupDao) {
         System.out.println("---> AMOUNT OF STUDENTS IN EACH GROUP:");
-        System.out.println(Arrays.toString(universityGroupDao.getStudentsAmountInEachGroup().toArray()));
-//        universityGroupDao.getStudentsAmountInEachGroup().forEach(System.out::println);
+        universityGroupDao.getStudentsAmountInEachGroup().forEach(System.out::println);
     }
 
 }

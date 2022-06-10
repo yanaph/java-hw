@@ -1,6 +1,7 @@
 package ua.service;
 
 import ua.dao.*;
+import ua.entity.Student;
 import ua.entity.University;
 import ua.entity.UniversityGroup;
 
@@ -44,8 +45,11 @@ public class InfrastructureService {
 
         curatorService.addCurator(universityGroup1);
         curatorService.addCurator(universityGroup2);
+        curatorService.addCurator(universityGroup3);
 
-        universityGroup1.getStudents().forEach(student -> courseService.setCourse(student, 3));
+        courseService.setCourse(universityGroup1.getStudents(), 3);
+        courseService.setCourse(universityGroup2.getStudents(), 2);
+        courseService.setCourse(universityGroup3.getStudents(), 1);
 
         for (University university : universities) {
             universityDao.save(university);
@@ -53,8 +57,10 @@ public class InfrastructureService {
     }
 
     public void print() {
-//        courseService.printCourseDaoResults(courseDao, 2, 6);
-//        curatorService.printCuratorDaoResults(curatorDao, LocalDate.of(1970,5,5), 10);
-    universityService.printingUniversityInfrastructure(universityDao);
+        courseService.printCourseDaoResults(courseDao, 2, 6);
+        curatorService.printCuratorDaoResults(curatorDao, LocalDate.of(1970, 5, 5), 10);
+        studentService.printStudentDaoResults(studentDao, 2);
+        universityGroupService.printUniversityGroupDaoResults(universityGroupDao);
+        universityService.printingUniversityInfrastructure(universityDao);
     }
 }

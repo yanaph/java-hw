@@ -12,15 +12,20 @@ import java.util.Set;
 public class CourseService {
     private static final Random RANDOM = new Random();
 
-    public void setCourse(Student student, int courseCount) {
-        Set<Course> courses = new HashSet<>();
-        for (int i = 0; i < courseCount; i++) {
-            final Course course = new Course("Course-" + RANDOM.nextInt(1000));
-            course.setStudentSet(Collections.singleton(student));
-            courses.add(course);
+    public void setCourse(Set<Student> students, int courseCount) {
+        if (students != null) {
+            Set<Course> courses = new HashSet<>();
+            students.forEach(student -> {
+                for (int i = 0; i < courseCount; i++) {
+                    final Course course = new Course("Course-" + RANDOM.nextInt(1000));
+                    course.setStudentSet(Collections.singleton(student));
+                    courses.add(course);
+                }
+                student.setCourseSet(courses);
+            });
         }
-        student.setCourseSet(courses);
     }
+
 
     public void printCourseDaoResults(CourseDao courseDao, Integer minDifficultyLevel, Integer maxDifficultyLevel) {
         System.out.println("---> ALL COURSES");

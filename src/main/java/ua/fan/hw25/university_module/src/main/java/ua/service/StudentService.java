@@ -20,9 +20,8 @@ public class StudentService {
         }
         group.setStudents(studentSet);
     }
-
-//    public void printStudentDaoResults(StudentDao studentDao, Integer id) {
-//        System.out.printf("---> GET STUDENT'S INFO BY ID: %s%n", id);
-//        studentDao.getStudentStudyInfoById(id).forEach(info-> System.out.println(info.getClass().getSimpleName()));
-//    }
+    public void printStudentDaoResults(StudentDao studentDao, Integer id) {
+        System.out.printf("---> GET STUDENT'S INFO BY ID: %s%n%n", id);
+        studentDao.getStudentStudyInfoById(id).forEach(System.out::println);
+    }
 }

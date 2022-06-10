@@ -21,45 +21,38 @@ public class UniversityService {
 
     public void printingUniversityInfrastructure(UniversityDao universityDao) {
         universityDao.getAll().forEach(university -> {
-            System.out.printf("UNIVERSITY: %s%n    GROUPS: %n", university.getUniName());
-            university.getUniversityGroups().forEach(universityGroup -> {
-                System.out.printf("--> Group: %s%n    > Curator: %s%n",
-                        universityGroup.getGroupName(), universityGroup.getCurator().getFullName());
-                universityGroup.getStudents().forEach(student -> {
-                    System.out.printf("    > Student: %s%n",
-                            student.getName());
-                    System.out.println("      > Student's courses:");
-                    student.getCourseSet().forEach(course -> {
-                        System.out.printf("        Discipline: %s%n         Difficulty (0-10): %s%n",
-                                course.getName(), course.getDifficultyLvl());
-                    });
+            System.out.printf("UNIVERSITY: %s%n    ", university.getUniName());
+            if (university.getUniversityGroups() != null) {
+                System.out.println("GROUPS: ");
+                university.getUniversityGroups().forEach(universityGroup -> {
+                    System.out.printf("--> Group: %s%n",
+                            universityGroup.getGroupName());
+                    if (universityGroup.getCurator() != null) {
+                        System.out.printf("    > Curator: %s%n", universityGroup.getCurator().getFullName());
+                        if (universityGroup.getStudents() != null) {
+                            universityGroup.getStudents().forEach(student -> {
+                                System.out.printf("    > Student: %s%n",
+                                        student.getName());
+                                if (student.getCourseSet() != null) {
+                                    System.out.println("      > Student's courses:");
+                                    student.getCourseSet().forEach(course -> {
+                                        System.out.printf("        Discipline: %s%n         Difficulty (0-10): %s%n",
+                                                course.getName(), course.getDifficultyLvl());
+                                    });
+                                } else {
+                                    System.out.print("      Student hasn't chose his courses yet.");
+                                }
+                            });
+                        } else {
+                            System.out.print("      No students yet. Enrollment is still on!");
+                        }
+                    } else {
+                        System.out.print("    Curator hasn't been chosen yet.");
+                    }
                 });
-                System.out.println();
-            });
+            } else {
+                System.out.println("No groups in university yet.");
+            }
         });
     }
 }
-
-//    public void printingUniversityInfrastructure(UniversityDao universityDao) {
-//        universityDao.getAll().forEach(university -> {
-//            System.out.printf("UNIVERSITY: %s%n    GROUPS: %n", university.getUniName());
-//            university.getUniversityGroups().forEach(universityGroup -> {
-//                System.out.printf("--> Group name: %s%n    Curator: %s%n    Quantity of students: %s%n%n",
-//                        universityGroup.getGroupName(), universityGroup.getCurator().getFullName(), universityGroup.getStudents().size());
-//                if (universityGroup.getStudents().size() > 0) {
-//                    universityGroup.getStudents().forEach(student -> {
-//                        System.out.printf("---> Name: %s%n     Quantity of courses: $s%n",
-//                                student.getName(), student.getCourseSet().size());
-//                        if (student.getCourseSet().size() > 0) {
-//                            System.out.println("      Student's courses:");
-//                            student.getCourseSet().forEach(course -> {
-//                                System.out.printf("----> Discipline: %s%n      Difficulty (0-10): %s%n",
-//                                        course.getName(), course.getDifficultyLvl());
-//                            });
-//                        }
-//                    });
-//                }
-//            });
-//        });
-//    }
-//}
