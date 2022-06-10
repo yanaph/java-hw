@@ -1,7 +1,7 @@
 package ua.dao;
 
-import ua.entity.Curator;
 import ua.entity.Student;
+import ua.entity.University;
 import ua.entity.UniversityGroup;
 
 import java.util.List;

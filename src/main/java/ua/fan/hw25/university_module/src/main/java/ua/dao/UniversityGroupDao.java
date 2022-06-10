@@ -1,6 +1,5 @@
 package ua.dao;
 
-import ua.entity.University;
 import ua.entity.UniversityGroup;
 
 import java.util.List;

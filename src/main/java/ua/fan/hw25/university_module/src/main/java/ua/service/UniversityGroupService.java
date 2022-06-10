@@ -4,6 +4,8 @@ import ua.dao.UniversityGroupDao;
 import ua.entity.University;
 import ua.entity.UniversityGroup;
 
+import java.util.Arrays;
+
 public class UniversityGroupService {
     public UniversityGroup createUniversityGroup(String name, University university) {
         return new UniversityGroup(name, university);
@@ -11,7 +13,8 @@ public class UniversityGroupService {
 
     public void printUniversityGroupDaoResults(UniversityGroupDao universityGroupDao) {
         System.out.println("---> AMOUNT OF STUDENTS IN EACH GROUP:");
-        universityGroupDao.getStudentsAmountInEachGroup().forEach(System.out::println);
+        System.out.println(Arrays.toString(universityGroupDao.getStudentsAmountInEachGroup().toArray()));
+//        universityGroupDao.getStudentsAmountInEachGroup().forEach(System.out::println);
     }
 
 }

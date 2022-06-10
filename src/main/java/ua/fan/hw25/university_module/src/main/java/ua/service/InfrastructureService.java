@@ -54,9 +54,6 @@ public class InfrastructureService {
 
     public void print() {
         courseService.printCourseDaoResults(courseDao, 2, 6);
-        curatorService.printCuratorDaoResults(curatorDao, LocalDate.of(1995,1,1), 5);
-        studentService.printStudentDaoResults(studentDao, 2);
-        universityGroupService.printUniversityGroupDaoResults(universityGroupDao);
+        curatorService.printCuratorDaoResults(curatorDao, LocalDate.of(1970,5,5), 10);
     }
-
 }
