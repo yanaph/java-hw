@@ -42,6 +42,7 @@ public class InfrastructureService {
 
         studentService.addStudents(universityGroup1, 2);
         studentService.addStudents(universityGroup2, 4);
+        studentService.addStudents(universityGroup3, 1);
 
         curatorService.addCurator(universityGroup1);
         curatorService.addCurator(universityGroup2);

@@ -13,7 +13,9 @@ public class UniversityGroupService {
 
     public void printUniversityGroupDaoResults(UniversityGroupDao universityGroupDao) {
         System.out.println("---> AMOUNT OF STUDENTS IN EACH GROUP:");
-        universityGroupDao.getStudentsAmountInEachGroup().forEach(System.out::println);
+        for (Object[] object : universityGroupDao.getStudentsAmountInEachGroup()) {
+            System.out.printf("Group name: %s%n Amount of students: %s%n%n", object[0], object[1]);
+        }
     }
 
 }

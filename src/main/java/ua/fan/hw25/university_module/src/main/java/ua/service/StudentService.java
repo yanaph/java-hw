@@ -21,7 +21,10 @@ public class StudentService {
         group.setStudents(studentSet);
     }
     public void printStudentDaoResults(StudentDao studentDao, Integer id) {
-        System.out.printf("---> GET STUDENT'S INFO BY ID: %s%n%n", id);
-        studentDao.getStudentStudyInfoById(id).forEach(System.out::println);
+        System.out.printf("---> GET STUDENT'S INFO BY ID: %s%n", id);
+        for (Object[] object: studentDao.getStudentStudyInfoById(id)) {
+            System.out.printf("Student's ID: %s%n Name: %s%n Group: %s%n Curator: %s%n University: %s%n%n",
+                    object[0], object[1], object[2], object[3], object[4]);
+        }
     }
 }

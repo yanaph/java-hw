@@ -20,8 +20,9 @@ public class UniversityService {
     }
 
     public void printingUniversityInfrastructure(UniversityDao universityDao) {
+        System.out.println("---> UNIVERSITY INFRASTRUCTURE");
         universityDao.getAll().forEach(university -> {
-            System.out.printf("UNIVERSITY: %s%n    ", university.getUniName());
+            System.out.printf("%nUNIVERSITY: %s%n    ", university.getUniName());
             if (university.getUniversityGroups() != null) {
                 System.out.println("GROUPS: ");
                 university.getUniversityGroups().forEach(universityGroup -> {
@@ -40,14 +41,14 @@ public class UniversityService {
                                                 course.getName(), course.getDifficultyLvl());
                                     });
                                 } else {
-                                    System.out.print("      Student hasn't chose his courses yet.");
+                                    System.out.println("      Student hasn't chose his courses yet.");
                                 }
                             });
                         } else {
-                            System.out.print("      No students yet. Enrollment is still on!");
+                            System.out.println("      No students yet. Enrollment is still on!");
                         }
                     } else {
-                        System.out.print("    Curator hasn't been chosen yet.");
+                        System.out.println("    Curator hasn't been chosen yet.");
                     }
                 });
             } else {

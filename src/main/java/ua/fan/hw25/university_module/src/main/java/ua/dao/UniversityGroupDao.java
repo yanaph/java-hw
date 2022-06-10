@@ -10,7 +10,7 @@ public class UniversityGroupDao extends AbstractDao<UniversityGroup> {
         aClass = UniversityGroup.class;
     }
 
-    public List<Object> getStudentsAmountInEachGroup() {
+    public List<Object[]> getStudentsAmountInEachGroup() {
         return ENTITY_MANAGER.createNativeQuery(
                     "SELECT universityGroup.groupName, COUNT(universityGroup_student.student_id) " +
                             "FROM universityGroup " +

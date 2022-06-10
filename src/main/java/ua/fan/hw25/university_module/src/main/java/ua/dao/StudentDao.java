@@ -12,7 +12,7 @@ public class StudentDao extends AbstractDao<Student> {
         aClass = Student.class;
     }
 
-    public List<Object> getStudentStudyInfoById(Integer id) {
+    public List<Object[]> getStudentStudyInfoById(Integer id) {
         return ENTITY_MANAGER.createNativeQuery(
                 "SELECT student.id, student.name, universityGroup.groupName, curator.fullName, university.uniName " +
                         "FROM curator INNER JOIN (university " +
