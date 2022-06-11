@@ -1,7 +1,6 @@
 package ua.service;
 
 import ua.dao.*;
-import ua.entity.Student;
 import ua.entity.University;
 import ua.entity.UniversityGroup;
 
@@ -25,36 +24,46 @@ public class InfrastructureService {
 
     public void createUniversityInfrastructure() {
         final List<University> universities = universityService.createUniversity();
-
         final University university1 = universities.get(0);
-        final UniversityGroup universityGroup1 =
-                universityGroupService.createUniversityGroup("universityGroup1", university1);
-        final UniversityGroup universityGroup2 =
-                universityGroupService.createUniversityGroup("universityGroup2", university1);
-        final UniversityGroup universityGroup3 =
-                universityGroupService.createUniversityGroup("universityGroup3", university1);
-
         final Set<UniversityGroup> universityGroups = new HashSet<>();
-        universityGroups.add(universityGroup1);
-        universityGroups.add(universityGroup2);
-        universityGroups.add(universityGroup3);
+
+        UniversityGroup[] groups = addGroupsToUniversity(university1, universityGroups);
         university1.setUniversityGroups(universityGroups);
-
-        studentService.addStudents(universityGroup1, 2);
-        studentService.addStudents(universityGroup2, 4);
-        studentService.addStudents(universityGroup3, 1);
-
-        curatorService.addCurator(universityGroup1);
-        curatorService.addCurator(universityGroup2);
-        curatorService.addCurator(universityGroup3);
-
-        courseService.setCourse(universityGroup1.getStudents(), 3);
-        courseService.setCourse(universityGroup2.getStudents(), 2);
-        courseService.setCourse(universityGroup3.getStudents(), 1);
+        addStudentsInEachGroup(groups);
+        addCuratorToEachGroup(groups);
+        setCoursesToEachStudent(groups);
 
         for (University university : universities) {
             universityDao.save(university);
         }
+    }
+
+    private void setCoursesToEachStudent(UniversityGroup[] groups) {
+        for (UniversityGroup group: groups) {
+            courseService.setCourse(group.getStudents(), 2);
+        }
+    }
+
+    private void addCuratorToEachGroup(UniversityGroup[] groups) {
+        for (UniversityGroup group : groups) {
+            curatorService.addCurator(group);
+        }
+    }
+
+    private void addStudentsInEachGroup(UniversityGroup[] groups) {
+        for (UniversityGroup group : groups) {
+            studentService.addStudents(group, 3);
+        }
+    }
+
+    private UniversityGroup[] addGroupsToUniversity(University university, Set<UniversityGroup> universityGroups) {
+        UniversityGroup[] arrayOfGroups = new UniversityGroup[3];
+        for (int i = 0; i < 3; i++) {
+             arrayOfGroups[i] =
+                    universityGroupService.createUniversityGroup("universityGroup" + (i + 1), university);
+            universityGroups.add(arrayOfGroups[i]);
+        }
+        return arrayOfGroups;
     }
 
     public void print() {
@@ -62,6 +71,6 @@ public class InfrastructureService {
         curatorService.printCuratorDaoResults(curatorDao, LocalDate.of(1970, 5, 5), 10);
         studentService.printStudentDaoResults(studentDao, 2);
         universityGroupService.printUniversityGroupDaoResults(universityGroupDao);
-        universityService.printingUniversityInfrastructure(universityDao);
+        universityService.printingAllUniversitiesInfrastructure(universityDao);
     }
 }
