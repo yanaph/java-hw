@@ -1,10 +1,10 @@
 package ua.fan;
 
-import ua.fan.service.UniversityQueryService;
+import ua.fan.service.MenuService;
 
 public class Main {
     public static void main(String[] args) {
-        UniversityQueryService universityQueryService = new UniversityQueryService();
-        universityQueryService.init();
+        MenuService menuService = new MenuService();
+        menuService.actionMenu();
     }
 }
