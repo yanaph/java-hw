@@ -28,4 +28,9 @@ public class Professor {
         this.lastName = lastName;
         this.age = age;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Name %s %s%n Age: %s y.o%n Discipline: %s", firstName, lastName, age, discipline.getCodeName());
+    }
 }

@@ -10,8 +10,4 @@ public class PrintInfoService {
             System.out.printf("%s: %s%n", info[0], info[1]);
         }
     }
-    public void printProfessorInfo(Professor professor){
-        System.out.printf("Name: %s %s%n Age: %s y.o%n",
-                professor.getFirstName(), professor.getLastName(), professor.getAge());
-    }
 }

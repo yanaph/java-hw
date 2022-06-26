@@ -62,7 +62,7 @@ public class MenuService {
         String professorsName = INPUT_SERVICE.getStringInput();
         final List<Professor> professors = PROFESSOR_DAO.getByName(professorsName);
         if (!professors.isEmpty()) {
-            professors.forEach(PRINT_INFO_SERVICE::printProfessorInfo);
+            professors.forEach(System.out::println);
         } else {
             System.out.println("0 result was found");
         }
