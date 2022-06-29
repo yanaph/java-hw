@@ -1,14 +1,13 @@
 package ua.fan.dao;
 
+import ua.fan.config.HibernateFactoryUtil;
 import ua.fan.entity.Student;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
-public class StudentDao extends AbstractDao<Student> {
-    @Override
-    protected void init() {
-        aClass = Student.class;
-    }
+public class StudentDao {
+    protected final static EntityManager ENTITY_MANAGER = HibernateFactoryUtil.getEntityManager();
 
     public List<Object[]> getStudentWithCertainAvgGrade(Integer avgGrade) {
             return ENTITY_MANAGER.createNativeQuery(

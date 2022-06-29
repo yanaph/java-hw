@@ -1,14 +1,13 @@
 package ua.fan.dao;
 
+import ua.fan.config.HibernateFactoryUtil;
 import ua.fan.entity.Discipline;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
-public class DisciplineDao extends AbstractDao<Discipline> {
-        @Override
-        protected void init() {
-            aClass = Discipline.class;
-        }
+public class DisciplineDao{
+    protected final static EntityManager ENTITY_MANAGER = HibernateFactoryUtil.getEntityManager();
 
     public List<Object[]> getDisciplineWithMaxAndMinAvgGrade() {
         return ENTITY_MANAGER.createNativeQuery(
